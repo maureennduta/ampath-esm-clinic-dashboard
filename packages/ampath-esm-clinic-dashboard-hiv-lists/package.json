@@ -1,5 +1,5 @@
 {
-  "name": "@ampath/esm-clinic-dashboard-hiv-lists",
+  "name": "@ampath/esm-clinic-dashboard-hiv-lists-app",
   "version": "0.1.0",
   "description": "The list reports for the HIV departement.",
   "keywords": [
@@ -13,7 +13,7 @@
   "author": "AMPATH",
   "homepage": "https://github.com/AMPATH/ampath-esm-clinic-dashboard#readme",
   "license": "MIT",
-  "main": "dist/ampath-esm-clinic-dashboard-hiv-lists.js",
+  "main": "dist/ampath-esm-clinic-dashboard-hiv-lists-app.js",
   "files": [
     "dist"
   ],
