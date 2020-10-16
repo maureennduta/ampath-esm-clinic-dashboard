@@ -36,9 +36,7 @@ const PatientList: React.FC<PatientListProps> = ({
           <thead>
             <tr>
               {columnsDef.map((column) => (
-                <th key={column.headerName}>
-                  <div>{column.headerName}</div>
-                </th>
+                <th key={column.headerName}>{column.headerName}</th>
               ))}
             </tr>
           </thead>
@@ -48,7 +46,10 @@ const PatientList: React.FC<PatientListProps> = ({
                 {columnsDef.map((col) => (
                   <td key={col.field} style={col.cellStyle}>
                     {col.cellRender
-                      ? col.cellRender(rowData[col.field])
+                      ? col.cellRender({
+                          value: rowData[col.field],
+                          rowNumber: index + 1,
+                        })
                       : rowData[col.field]}
                   </td>
                 ))}
@@ -56,14 +57,6 @@ const PatientList: React.FC<PatientListProps> = ({
             ))}
           </tbody>
         </table>
-      </div>
-      <div className={styles["button-container"]}>
-        <button className="omrs-btn omrs-filled-action">
-          Export{" "}
-          <svg className="omrs-icon">
-            <use xlinkHref="#omrs-icon-download"></use>
-          </svg>
-        </button>
       </div>
     </div>
   );
