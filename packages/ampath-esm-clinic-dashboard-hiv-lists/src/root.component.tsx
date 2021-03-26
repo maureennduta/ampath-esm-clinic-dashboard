@@ -6,7 +6,7 @@ import { useMessageEventHandler } from "./custom-hooks/useMessageEventHandler";
 const Root: React.FC = () => {
   const { sendMessage, handleMessage } = useMessageEventHandler();
   React.useEffect(() => {
-    sendMessage({action : "authenticate"});
+    sendMessage({ action: "authenticate" });
   }, []);
 
   React.useEffect(() => {
