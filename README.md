@@ -1,36 +1,65 @@
-# `@ampath/esm-client-dashboard`
+# Ampath Clinic dashboard
 
-A monorepo for all the different clinic dashboard widgets.
+This is a [lerna](https://lerna.js.org) project containing ampath clinic dashboard micro-frontend.
+This package includes the following
 
-## Available Packages
+  - [@ampath/esm-hiv-clinic-dashboard-app](packages/esm-hiv-clinic-dashboard-app)
 
-- HIV-related dashboard items
-  * Lists (...)
-  * Visualizations (...)
-  * Reports (...)
-- Oncology related items
-  * Lists (...)
-- Diabetes related items
-  * Lists (...)
+## Repository Development
 
-## Commands
+### Prerequisites
 
-If you want to debug a certain microfrontend (e.g., `@ampath/esm-clinic-dashboard-oncology-lists`):
+- [Node](https://nodejs.org/downloads) version ^10
+- yarn ```sh npm install yarn -g ```
+- lerna  ```sh npm install lerna -g ```
 
-```sh
-name=oncology-lists yarn debug
-```
+### Getting started
 
-For changing the port please use `port` (e.g., `8085`):
+
+To install and setup the repository once cloned, just use the following command
 
 ```sh
-port=8085 yarn debug
+  npx lerna bootstrap
 ```
 
-Of course, you can combine these:
+To develop a specific package e.g. [@ampath/esm-hiv-clinic-dashboard-app](packages/esm-hiv-clinic-dashboard-app)
+
+run this command
 
 ```sh
-port=8085 name=oncology-lists yarn debug
+  npx openmrs develop --sources 'packages/esm-hiv-clinic-dashboard-app'
 ```
 
-By default, port `8080` and `@ampath/esm-clinic-dashboard-hiv-lists` is taken.
+You can always use regex to run multiple packages 
+
+```sh
+npx openmrs develop --sources 'packages/esm-{package1,package2}-app`
+```
+
+### Building
+
+For building the code just run
+
+```sh 
+npx lerna run build
+```
+
+### Tests
+
+To verify that all the test run from the root directory
+
+```sh
+yarn test or npm test
+```
+
+## Deployment
+
+The `master` branch of this repo is deployed in [ng2-amrs](https://github.com/AMPATH/ng2-amrs)
+
+## Configuration
+
+This module is designed to be driven by configuration files.
+
+## Resources
+
+- [JIRA Epic](https://jira.ampath.or.ke/)

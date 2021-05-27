@@ -1,0 +1,55 @@
+{
+  "name": "@ampath/esm-hiv-clinic-dashboard-app",
+  "version": "0.1.0",
+  "description": "The list reports for the HIV department.",
+  "keywords": [
+    "ampath",
+    "hiv",
+    "list",
+    "widgets",
+    "esm",
+    "spa"
+  ],
+  "author": "AMPATH",
+  "homepage": "https://github.com/AMPATH/ampath-esm-clinic-dashboard#readme",
+  "browser": "dist/ampath-esm-hiv-clinic-dashboard-app.js",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMPATH/ampath-esm-clinic-dashboard.git"
+  },
+  "scripts": {
+    "start": "openmrs develop",
+    "serve": "webpack serve --mode=development",
+    "debug": "npm run serve",
+    "build": "webpack --mode production",
+    "analyze": "webpack --mode=production --env.analyze=true",
+    "lint": "eslint src --ext tsx",
+    "typescript": "tsc",
+    "extract-translations": "i18next 'src/**/*.component.tsx'"
+  },
+  "bugs": {
+    "url": "https://github.com/AMPATH/ampath-esm-clinic-dashboard/issues"
+  },
+  "dependencies": {
+    "@carbon/icons-react": "10.28.0",
+    "carbon-components-react": "7.31.0",
+    "lodash-es": "^4.17.21",
+    "react-csv-downloader": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@openmrs/esm-framework": "3.x",
+    "carbon-components": "10.x",
+    "carbon-icons": "7.x",
+    "dayjs": "1.x",
+    "react": "16.x",
+    "react-i18next": "11.x",
+    "react-router-dom": "5.x",
+    "rxjs": "6.x"
+  },
+  "devDependencies": {}
+}

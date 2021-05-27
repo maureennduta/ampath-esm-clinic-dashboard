@@ -1,0 +1,14 @@
+[
+  {
+    "name": "CROSS BORDER REPORT",
+    "description": "Cross border integration Report",
+    "url": "/hiv-clinic-dashboard/cross-border-report",
+    "icon": "omrs-icon-menu"
+  },
+  {
+    "name": "OVC REPORT",
+    "description": "OVC Report",
+    "url": "/hiv-clinic-dashboard/ovc-report",
+    "icon": "omrs-icon-menu"
+  }
+]
