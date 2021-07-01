@@ -12,15 +12,12 @@ import DataTable, {
 } from 'carbon-components-react/es/components/DataTable';
 import styles from './hiv-summary-historical.component.scss';
 import { useTranslation } from 'react-i18next';
-import { HIVSummary } from '../../types';
-import { formatDate } from '../helper';
+import { formatDate, zeroVl } from '../helper';
+import { useHivSummaryContext } from '../../hooks/useHivSummary';
 
-interface HivSummaryHistoricalProps {
-  hivSummary: Array<HIVSummary>;
-}
-
-const HivSummaryHistorical: React.FC<HivSummaryHistoricalProps> = ({ hivSummary }) => {
+const HivSummaryHistorical: React.FC = () => {
   const { t } = useTranslation();
+  const hivSummary = useHivSummaryContext();
   const tableHeaders: Array<DataTableHeader> = React.useMemo(
     () => [
       {
@@ -29,9 +26,9 @@ const HivSummaryHistorical: React.FC<HivSummaryHistoricalProps> = ({ hivSummary 
       },
       { key: 'encounterType', header: t('encounterType', 'Encounter Type') },
       { key: 'rtcDate', header: t('rtcDate', 'RTC Date') },
-      { key: 'medicatePickUpDate', header: t('medicatePickUpDate', 'Medication Pick up Date') },
-      { key: 'tbTreatmentStartDate', header: t('tbTreatmentStartDate', 'TB Treatment Start Date') },
-      { key: 'tbTreatmentEndDate', header: t('tbTreatmentEndDate', 'TB Treatment End Date') },
+      { key: 'medicatePickUpDate', header: t('medicatePickUpDate', 'Med Pick up Date') },
+      { key: 'tbTreatmentStartDate', header: t('tbTreatmentStartDate', 'TB TREA Start Date') },
+      { key: 'tbTreatmentEndDate', header: t('tbTreatmentEndDate', 'TB TREA End Date') },
       { key: 'arvMeds', header: t('arvMeds', 'ARV Meds') },
       { key: 'cd4Count', header: t('cd4Count', 'CD4 Count') },
       { key: 'viralLoad', header: t('vitalLoad', 'Viral Load') },
@@ -53,10 +50,11 @@ const HivSummaryHistorical: React.FC<HivSummaryHistoricalProps> = ({ hivSummary 
           tbTreatmentStartDate: formatDate(hivSum.tb_tx_start_date),
           tbTreatmentEndDate: formatDate(hivSum.tb_tx_stop_date),
           arvMeds: hivSum.cur_arv_meds,
-          cd4Count: `${hivSum?.cd4_1 ?? '-'} ${formatDate(hivSum.cd4_1_date)}`,
-          viralLoad: `${hivSum?.vl_1 ?? '-'} ${formatDate(hivSum.vl_1_date)}`,
+          cd4Count: `${hivSum?.cd4_1 ?? '-'}`,
+          viralLoad: `${zeroVl(hivSum?.vl_1)}`,
           whoStage: hivSum.cur_who_stage,
           mdtSessionNumber: `${hivSum.mdt_session_number ?? '-'}`,
+          ...hivSum,
         };
       }),
     [hivSummary],
@@ -71,7 +69,6 @@ const HivSummaryHistorical: React.FC<HivSummaryHistoricalProps> = ({ hivSummary 
               <TableRow>
                 {headers.map((header) => (
                   <TableHeader
-                    className={`${styles.productiveHeading01} ${styles.text02}`}
                     {...getHeaderProps({
                       header,
                       isSortable: header.isSortable,
@@ -81,9 +78,9 @@ const HivSummaryHistorical: React.FC<HivSummaryHistoricalProps> = ({ hivSummary 
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={styles.tableBodyWrapper}>
               {rows.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow style={{ background: 'red' }} key={row.id}>
                   {row.cells.map((cell) => {
                     return <TableCell key={cell.id}>{cell.value?.content ?? cell.value}</TableCell>;
                   })}

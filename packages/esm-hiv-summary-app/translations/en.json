@@ -7,12 +7,12 @@
   "hivClinicalSummary": "HIV Clinical Summary",
   "hivSummary": "HIV Summary",
   "mdtSessionNumber": "EAC",
-  "medicatePickUpDate": "Medication Pick up Date",
+  "medicatePickUpDate": "Med Pick up Date",
   "medicationChangeHistory": "Medication Change History",
   "previousVisitSummary": "Previous Visit Summary",
   "rtcDate": "RTC Date",
-  "tbTreatmentEndDate": "TB Treatment End Date",
-  "tbTreatmentStartDate": "TB Treatment Start Date",
+  "tbTreatmentEndDate": "TB Treat End Date",
+  "tbTreatmentStartDate": "TB Treat Start Date",
   "vitalLoad": "Viral Load",
   "whoStage": "WHO Stage"
 }

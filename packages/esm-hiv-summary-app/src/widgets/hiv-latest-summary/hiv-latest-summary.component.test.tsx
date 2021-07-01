@@ -6,7 +6,7 @@ import { mockHIVSummary } from '../../../../../__mocks__/mock-hiv-summary';
 
 describe('<HivLatestSummary/>', () => {
   const renderHIVSummary = () => {
-    render(<HivLatestSummary patient={mockPatient} hivSummaryData={mockHIVSummary} />);
+    render(<HivLatestSummary patient={mockPatient} />);
   };
 
   it('should render hiv-summary without dying', () => {

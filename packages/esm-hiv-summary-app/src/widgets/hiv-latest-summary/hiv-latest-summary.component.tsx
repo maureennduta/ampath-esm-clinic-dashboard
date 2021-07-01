@@ -1,24 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './hiv-latest-summary.component.scss';
 import { formatDate, determineEligibilityForContraception, zeroVl, loadHivSummary } from '../helper';
 import isEmpty from 'lodash-es/isEmpty';
 import { HIVSummary, PatientContraceptionEligibility } from '../../types';
 import WarningAlt16 from '@carbon/icons-react/es/warning--alt/20';
 import HivSummaryLabel from '../hiv-summary-label/hiv-summary-label.component';
+import { useHivSummaryContext } from '../../hooks/useHivSummary';
 
 interface HivLatestSummaryProps {
-  hivSummaryData: Array<HIVSummary>;
   patient: fhir.Patient;
 }
 
-const HivLatestSummary: React.FC<HivLatestSummaryProps> = ({ hivSummaryData, patient }) => {
+const HivLatestSummary: React.FC<HivLatestSummaryProps> = ({ patient }) => {
+  const hivSummaryData = useHivSummaryContext();
   const [patientContraception, setContraceptionEligibilityStatus] = useState<PatientContraceptionEligibility>(null);
-  const [hivSummary, setHivSummary] = useState<HIVSummary>(null);
+  const [hivSummary, setHivSummary] = React.useState<HIVSummary>();
 
-  const hivSummaryA = React.useMemo(() => {
-    const hivSum = loadHivSummary(hivSummaryData);
-    setContraceptionEligibilityStatus(determineEligibilityForContraception(hivSum, patient));
-    setHivSummary(hivSum);
+  const withStyles = (period: string) => {
+    switch (period?.toLocaleLowerCase()) {
+      case 'short term':
+        return styles.warning;
+      case 'long term':
+        return '';
+      case 'none':
+        return styles.danger;
+      default:
+        return styles.danger;
+    }
+  };
+
+  React.useEffect(() => {
+    if (hivSummaryData.length) {
+      const hivSum = loadHivSummary(hivSummaryData);
+      setContraceptionEligibilityStatus(determineEligibilityForContraception(hivSum, patient));
+      setHivSummary(hivSum);
+    }
   }, [hivSummaryData, patient]);
 
   return (
@@ -90,10 +106,7 @@ const HivLatestSummary: React.FC<HivLatestSummaryProps> = ({ hivSummaryData, pat
           title={'Contraception Method'}
           value={
             patientContraception?.eligiblePatient ? (
-              <div
-                className={`${styles.contraceptionContainer} ${
-                  hivSummary?.contraceptive_method.period === 'short term' ? styles.warning : styles.danger
-                }`}>
+              <div className={`${styles.contraceptionContainer} ${withStyles(hivSummary.contraceptive_method.period)}`}>
                 {hivSummary?.contraceptive_method.period !== 'Long term' && <WarningAlt16 />}
                 {hivSummary?.contraceptive_method?.period && hivSummary?.contraceptive_method?.period}
                 {`(${hivSummary?.contraceptive_method?.name.toUpperCase()})`}
