@@ -16,7 +16,7 @@ const HivLatestSummary: React.FC<HivLatestSummaryProps> = ({ patient }) => {
   const [patientContraception, setContraceptionEligibilityStatus] = useState<PatientContraceptionEligibility>(null);
   const [hivSummary, setHivSummary] = React.useState<HIVSummary>();
 
-  const withStyles = (period: string) => {
+  const withContraceptionPeriodStyles = (period: string) => {
     switch (period?.toLocaleLowerCase()) {
       case 'short term':
         return styles.warning;
@@ -106,7 +106,10 @@ const HivLatestSummary: React.FC<HivLatestSummaryProps> = ({ patient }) => {
           title={'Contraception Method'}
           value={
             patientContraception?.eligiblePatient ? (
-              <div className={`${styles.contraceptionContainer} ${withStyles(hivSummary.contraceptive_method.period)}`}>
+              <div
+                className={`${styles.contraceptionContainer} ${withContraceptionPeriodStyles(
+                  hivSummary.contraceptive_method.period,
+                )}`}>
                 {hivSummary?.contraceptive_method.period !== 'Long term' && <WarningAlt16 />}
                 {hivSummary?.contraceptive_method?.period && hivSummary?.contraceptive_method?.period}
                 {`(${hivSummary?.contraceptive_method?.name.toUpperCase()})`}
