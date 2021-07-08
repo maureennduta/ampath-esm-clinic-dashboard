@@ -63,7 +63,7 @@ const CrossBorderReport: React.FC = () => {
         setLoadReport(!loadReport);
       }
     }
-  }, [loadReport, location]);
+  }, []);
 
   const generateReport = (): void => {
     month ?? setMonth(new Date());
