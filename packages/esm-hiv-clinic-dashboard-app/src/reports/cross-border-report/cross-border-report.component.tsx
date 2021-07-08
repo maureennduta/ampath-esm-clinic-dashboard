@@ -131,7 +131,9 @@ const CrossBorderReport: React.FC = () => {
               result={crossBorderReportData.result}
               queriesAndSchemas={crossBorderReportData.queriesAndSchemas}
               params={{
-                patientListUrl: `/home/cross-border-patient-list/${locationUuid}/${month ?? new Date()}`,
+                patientListUrl: `/hiv-clinic-dashboard/cross-border-patient-list/${locationUuid}/${
+                  month ?? new Date()
+                }`,
               }}
             />
           )}

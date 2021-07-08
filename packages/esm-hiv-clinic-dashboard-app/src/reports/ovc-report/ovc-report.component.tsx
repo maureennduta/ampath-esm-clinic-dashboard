@@ -119,7 +119,7 @@ const OVCReport: React.FC = () => {
               result={ovcReportData.result}
               queriesAndSchemas={ovcReportData.queriesAndSchemas}
               params={{
-                patientListUrl: `/home/ovc-patient-list/${endDate ?? new Date()}/${locationUuid}`,
+                patientListUrl: `/hiv-clinic-dashboard/ovc-patient-list/${endDate ?? new Date()}/${locationUuid}`,
               }}
             />
           )}
