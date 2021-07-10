@@ -1,0 +1,10 @@
+.emptyNotifications {
+  margin: 4rem 1rem;
+}
+
+.loading {
+  margin: 1rem;
+  :global(.bx--inline-loading__text) {
+    color: white;
+  }
+}
